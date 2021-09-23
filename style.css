@@ -105,10 +105,7 @@ button {
   height: 100%;
   background-color: "";
   position: relative;
-  -webkit-transition: -webkit-transform 150ms ease-in;
-  transition: -webkit-transform 150ms ease-in;
-  transition: transform 150ms ease-in;
-  transition: transform 150ms ease-in, -webkit-transform 150ms ease-in;
+  margin-top: 40px;
 }
 
 /** Pop-up part setting **/

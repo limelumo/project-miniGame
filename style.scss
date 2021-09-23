@@ -67,7 +67,6 @@ $point_c: wheat;
   border: 4px solid black;
   border-radius: 6px;
   margin-top: 8px;
-
   // visibility: hidden;
 }
 
@@ -78,14 +77,14 @@ $point_c: wheat;
   text-align: center;
   border: 3px solid black;
   margin-top: 8px;
-
   // visibility: hidden;
 }
 
 .game__field {
   @include object(100%, 100%, "");
   position: relative;
-  transition: transform 150ms ease-in;
+  margin-top: 40px;
+  // transition: transform 150ms ease-in;
 }
 
 /** Pop-up part setting **/
