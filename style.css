@@ -169,6 +169,7 @@ button {
   color: white;
   border-radius: 50%;
   border: 3px solid white;
+  margin-bottom: 0.5em;
 }
 
 .pop-up__hide {
