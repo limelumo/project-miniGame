@@ -5,10 +5,15 @@ const COMPUTER_COUNT = 5;
 const BUG_COUNT = 5;
 const GAME_DURATION_SEC = 5;
 
+const computers = document.querySelectorAll('.computer');
+const bugs = document.querySelectorAll('.bug');
+
 const gameBtn = document.querySelector('.game__button');
 const field = document.querySelector('.game__field');
 const gameTimer = document.querySelector('.game__timer');
 const gameScore = document.querySelector('.game__score');
+const playBtn = document.querySelector('.game__playBtn');
+const stopBtn = document.querySelector('.game__stopBtn');
 const fieldRect = field.getBoundingClientRect();
 
 const popUp = document.querySelector('.pop-up');
@@ -19,34 +24,55 @@ let started = false;
 let score = 0;
 let timer = undefined;
 
+field.addEventListener('click', onFieldClick);
+
 gameBtn.addEventListener('click', () => {
   if (started) {
     stopGame();
   } else {
     startGame();
   }
-  started = !started;
+});
+
+popUpRefresh.addEventListener('click', () => {
+  startGame();
+  hidePopUp();
 });
 
 function startGame() {
+  started = true;
   initGame();
   showStopButton();
   showTimerAndScore();
 }
 
 function stopGame() {
+  started = false;
   stopGameTimer();
 }
 
+function finishGame(win) {
+  started = false;
+  hideGameButton();
+  showPopUpWithText(win ? 'YOU WON🎊' : 'YOU LOST🎃');
+}
+
 function showStopButton() {
-  const playBtn = document.querySelector('.game__playBtn');
-  const stopBtn = document.querySelector('.game__stopBtn');
   playBtn.style.display = 'none';
   stopBtn.style.display = 'block';
 }
 
 function hideGameButton() {
   gameBtn.style.visibility = 'hidden';
+}
+
+function showGameButton() {
+  gameBtn.style.visibility = 'visible';
+  gameTimer.style.visibility = 'hidden';
+  gameScore.style.visibility = 'hidden';
+
+  playBtn.style.display = 'block';
+  stopBtn.style.display = 'none';
 }
 
 function showTimerAndScore() {
@@ -61,6 +87,8 @@ function startGameTimer() {
   timer = setInterval(() => {
     if (remainingTimeSec <= 0) {
       clearInterval(timer);
+      showPopUpWithText('GAME OVER🙄');
+      finishGame(BUG_COUNT === score);
       return;
     }
     updateTimerText(--remainingTimeSec);
@@ -85,6 +113,30 @@ function initGame() {
   startGameTimer();
 }
 
+function onFieldClick(e) {
+  if (!started) {
+    return;
+  }
+
+  const target = e.target;
+  if (target.matches('.bug')) {
+    target.remove();
+    score++;
+    updateScoreBoard();
+
+    if (score === BUG_COUNT) {
+      finishGame(true);
+    }
+  } else if (target.matches('.computer')) {
+    stopGameTimer();
+    finishGame(false);
+  }
+}
+
+function updateScoreBoard() {
+  gameScore.innerHTML = `<i class="fas fa-bug"></i>${BUG_COUNT - score}`;
+}
+
 function updateTimerText(time) {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -94,6 +146,11 @@ function updateTimerText(time) {
 function showPopUpWithText(text) {
   popUpText.innerText = text;
   popUp.classList.remove('pop-up__hide');
+}
+
+function hidePopUp() {
+  popUp.classList.add('pop-up__hide');
+  showGameButton();
 }
 
 function addItem(className, count, imgPath) {
