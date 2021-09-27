@@ -15,19 +15,22 @@
   <body>
     <section class="game__container">
       <header class="game__header">
-        <div class="game__score"><i class="fas fa-bug"></i>5</div>
-        <div class="game__timer">0:0</div>
-        <button class="game__button">Play!</button>
+        <div class="game__score"><i class="fas fa-bug"></i></div>
+        <div class="game__timer"></div>
+        <button class="game__button">
+          <span class="game__playBtn">Play!</span>
+          <span class="game__stopBtn">Stop</span>
+        </button>
       </header>
 
       <section class="game__field"></section>
     </section>
 
-    <section class="pop-up">
+    <section class="pop-up pop-up__hide">
       <button class="pop-up__refresh">
         <i class="fas fa-redo"></i>
       </button>
-      <span class="pop-up__message"></span>
+      <span class="pop-up__message">Replay?</span>
     </section>
   </body>
 </html>

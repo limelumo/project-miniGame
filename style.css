@@ -63,6 +63,7 @@ button {
   font-size: 2em;
   font-weight: bold;
   color: white;
+  visibility: hidden;
 }
 
 .game__score i {
@@ -81,6 +82,7 @@ button {
   font-weight: bold;
   color: white;
   text-align: center;
+  visibility: hidden;
 }
 
 .game__button {
@@ -99,13 +101,20 @@ button {
           transform: scale(1.05);
 }
 
+.game__stopBtn {
+  display: none;
+}
+
 .game__field {
   width: 100%;
   height: 100%;
   background-color: "";
   position: relative;
   margin-top: 16em;
-  border: 1px solid red;
+}
+
+.game__hide {
+  visibility: hidden;
 }
 
 /** Pop-up part setting **/

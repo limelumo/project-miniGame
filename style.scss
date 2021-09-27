@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 @import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@400;500;600;700;800&display=swap');
 // font-family: 'Gemunu Libre', sans-serif;
 
@@ -55,7 +54,7 @@ $point_c: darksalmon;
 
 .game__score {
   @include font(2em, bold, white);
-  // visibility: hidden;
+  visibility: hidden;
 
   i {
     @include object(1.5em, 1.5em, $point_c);
@@ -70,7 +69,7 @@ $point_c: darksalmon;
 .game__timer {
   @include font(4em, bold, white);
   text-align: center;
-  // visibility: hidden;
+  visibility: hidden;
 }
 
 .game__button {
@@ -83,12 +82,19 @@ $point_c: darksalmon;
   }
 }
 
+.game__stopBtn {
+  display: none;
+}
+
 .game__field {
   @include object(100%, 100%, '');
   position: relative;
   margin-top: 16em;
-  border: 1px solid red;
   // transition: transform 150ms ease-in;
+}
+
+.game__hide {
+  visibility: hidden;
 }
 
 /** Pop-up part setting **/
