@@ -1,9 +1,13 @@
 @charset "UTF-8";
 
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@400;500;600;700;800&display=swap');
+// font-family: 'Gemunu Libre', sans-serif;
+
 body {
   margin: 0;
-  padding: 3%;
+  padding: 2%;
   background-color: black;
+  font-family: 'Gemunu Libre', sans-serif;
   overflow-y: hidden;
 }
 
@@ -32,68 +36,68 @@ button {
   color: $font_c;
 }
 
-$point_c: wheat;
+$point_c: darksalmon;
 
 /** Game part setting **/
 .game__container {
-  @include object(100%, 800px, "");
+  @include object(95vw, 95vh, '');
   @include flex(center, center, column);
   background: url(./img/background.png) center/cover no-repeat;
   border-radius: 10px;
 }
 
 .game__header {
-  @include flex(center, center, column);
-  margin: 40px 0;
+  @include object(90%, auto, '');
+  @include flex(center, space-between, '');
+  margin: 2em 0;
   user-select: none;
 }
 
+.game__score {
+  @include font(2em, bold, white);
+  // visibility: hidden;
+
+  i {
+    @include object(1.5em, 1.5em, $point_c);
+    border: 3px solid white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 1.5em;
+    margin-right: 12px;
+  }
+}
+
+.game__timer {
+  @include font(4em, bold, white);
+  text-align: center;
+  // visibility: hidden;
+}
+
 .game__button {
-  @include object(60px, 60px, $point_c);
-  @include font(24px, "", black);
-  border: 4px solid black;
-  border-radius: 6px;
+  @include font(2em, 700, white);
   transition: transform 150ms ease-in;
+  background-color: transparent;
 
   &:hover {
     transform: scale(1.05);
   }
 }
 
-.game__timer {
-  @include object(140px, 50px, white);
-  @include font(32px, bold, "");
-  text-align: center;
-  border: 4px solid black;
-  border-radius: 6px;
-  margin-top: 8px;
-  // visibility: hidden;
-}
-
-.game__score {
-  @include object(50px, 50px, darksalmon);
-  @include font(32px, bold, white);
-  border-radius: 50%;
-  text-align: center;
-  border: 3px solid black;
-  margin-top: 8px;
-  // visibility: hidden;
-}
-
 .game__field {
-  @include object(100%, 100%, "");
+  @include object(100%, 100%, '');
   position: relative;
-  margin-top: 40px;
+  margin-top: 16em;
+  border: 1px solid red;
   // transition: transform 150ms ease-in;
 }
 
 /** Pop-up part setting **/
 .pop-up {
-  @include object(340px, auto, #00000080);
+  @include object(55%, auto, #00000090);
   @include flex(center, center, column);
-  @include font(32px, bold, white);
+  @include font(3em, bold, white);
   bottom: 2rem;
-  padding: 16px;
+  padding: 0.8em;
   border-radius: 6px;
   margin: auto;
   text-align: center;
@@ -101,11 +105,11 @@ $point_c: wheat;
 }
 
 .pop-up__refresh {
-  @include object(60px, 60px, $point_c);
-  @include flex(center, center, "");
-  @include font(24px, "", black);
+  @include object(2em, 2em, $point_c);
+  @include flex(center, center, '');
+  @include font(0.65em, '', white);
   border-radius: 50%;
-  border: 3px solid black;
+  border: 3px solid white;
 }
 
 .pop-up__hide {
