@@ -1,20 +1,21 @@
 'use strict';
 
 const COMPUTER_SIZE = 200;
-const COMPUTER_COUNT = 5;
-const BUG_COUNT = 5;
-const GAME_DURATION_SEC = 5;
+const COMPUTER_COUNT = 20;
+const BUG_COUNT = 20;
+const GAME_DURATION_SEC = 20;
 
 const computers = document.querySelectorAll('.computer');
 const bugs = document.querySelectorAll('.bug');
 
-const gameBtn = document.querySelector('.game__button');
 const field = document.querySelector('.game__field');
+const fieldRect = field.getBoundingClientRect();
+const gameBtn = document.querySelector('.game__button');
 const gameTimer = document.querySelector('.game__timer');
 const gameScore = document.querySelector('.game__score');
+
 const playBtn = document.querySelector('.game__playBtn');
 const stopBtn = document.querySelector('.game__stopBtn');
-const fieldRect = field.getBoundingClientRect();
 
 const popUp = document.querySelector('.pop-up');
 const popUpText = document.querySelector('.pop-up__message');
@@ -25,7 +26,6 @@ let score = 0;
 let timer = undefined;
 
 field.addEventListener('click', onFieldClick);
-
 gameBtn.addEventListener('click', () => {
   if (started) {
     stopGame();
@@ -44,16 +44,20 @@ function startGame() {
   initGame();
   showStopButton();
   showTimerAndScore();
+  startGameTimer();
 }
 
 function stopGame() {
   started = false;
   stopGameTimer();
+  hideGameButton();
+  showPopUpWithText('Repaly?');
 }
 
 function finishGame(win) {
   started = false;
   hideGameButton();
+  stopGameTimer();
   showPopUpWithText(win ? 'YOU WON🎊' : 'YOU LOST🎃');
 }
 
@@ -64,15 +68,6 @@ function showStopButton() {
 
 function hideGameButton() {
   gameBtn.style.visibility = 'hidden';
-}
-
-function showGameButton() {
-  gameBtn.style.visibility = 'visible';
-  gameTimer.style.visibility = 'hidden';
-  gameScore.style.visibility = 'hidden';
-
-  playBtn.style.display = 'block';
-  stopBtn.style.display = 'none';
 }
 
 function showTimerAndScore() {
@@ -97,20 +92,30 @@ function startGameTimer() {
 
 function stopGameTimer() {
   clearInterval(timer);
-  hideGameButton();
-  showPopUpWithText('Replay?');
+}
+
+function updateTimerText(time) {
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+  gameTimer.innerText = `${minutes}:${seconds}`;
+}
+
+function showPopUpWithText(text) {
+  popUpText.innerText = text;
+  popUp.classList.remove('pop-up__hide');
+}
+
+function hidePopUp() {
+  popUp.classList.add('pop-up__hide');
 }
 
 function initGame() {
+  score = 0;
   field.innerHTML = '';
   gameScore.innerHTML = `<i class="fas fa-bug"></i>${BUG_COUNT}`;
 
   addItem('computer', COMPUTER_COUNT, 'img/computer.png');
   addItem('bug', BUG_COUNT, 'img/bug.png');
-
-  gameTimer.style.visibility = 'visible';
-  gameScore.style.visibility = 'visible';
-  startGameTimer();
 }
 
 function onFieldClick(e) {
@@ -128,29 +133,12 @@ function onFieldClick(e) {
       finishGame(true);
     }
   } else if (target.matches('.computer')) {
-    stopGameTimer();
     finishGame(false);
   }
 }
 
 function updateScoreBoard() {
   gameScore.innerHTML = `<i class="fas fa-bug"></i>${BUG_COUNT - score}`;
-}
-
-function updateTimerText(time) {
-  const minutes = Math.floor(time / 60);
-  const seconds = time % 60;
-  gameTimer.innerText = `${minutes}:${seconds}`;
-}
-
-function showPopUpWithText(text) {
-  popUpText.innerText = text;
-  popUp.classList.remove('pop-up__hide');
-}
-
-function hidePopUp() {
-  popUp.classList.add('pop-up__hide');
-  showGameButton();
 }
 
 function addItem(className, count, imgPath) {

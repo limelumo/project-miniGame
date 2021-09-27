@@ -99,7 +99,7 @@ $point_c: darksalmon;
 
 /** Pop-up part setting **/
 .pop-up {
-  @include object(55%, auto, #00000090);
+  @include object(55%, auto, #00000095);
   @include flex(center, center, column);
   @include font(3em, bold, white);
   bottom: 2rem;
