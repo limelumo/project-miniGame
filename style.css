@@ -120,7 +120,7 @@ button {
   height: 100%;
   background-color: "";
   position: relative;
-  margin-top: 16em;
+  margin-top: 10em;
 }
 
 /** Game Start Pop-up part setting **/
@@ -265,6 +265,7 @@ button {
   display: none;
 }
 
+/** Items setting **/
 .computer,
 .bug {
   -webkit-transition: -webkit-transform 100ms ease-in;

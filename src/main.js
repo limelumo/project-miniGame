@@ -2,8 +2,8 @@
 
 const COMPUTER_SIZE = 150;
 let COMPUTER_COUNT = 6;
-let BUG_COUNT = 6;
-let GAME_DURATION_SEC = 4;
+let BUG_COUNT = 3;
+let GAME_DURATION_SEC = 3;
 
 const computers = document.querySelectorAll('.computer');
 const bugs = document.querySelectorAll('.bug');
@@ -51,9 +51,9 @@ nextLevelBtn.addEventListener('click', () => {
   level++;
   gameLevel.innerText = level;
 
-  COMPUTER_COUNT += GAME_DURATION_SEC;
-  BUG_COUNT += BUG_COUNT;
-  GAME_DURATION_SEC += GAME_DURATION_SEC;
+  COMPUTER_COUNT += 6;
+  BUG_COUNT += 3;
+  GAME_DURATION_SEC += 3;
   startGame();
   hidePopUp();
   showStopButton();
@@ -89,10 +89,15 @@ function stopGame() {
 function finishGame(win) {
   started = false;
   hideGameButton();
+
   if (win) {
     playSound(winSound);
+    popUpNext.style.display = 'block';
+    popUpRefresh.style.display = 'none';
   } else {
     playSound(computerSound);
+    popUpNext.style.display = 'none';
+    popUpRefresh.style.display = 'block';
   }
   stopGameTimer();
   stopSound(bgSound);
