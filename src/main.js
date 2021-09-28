@@ -1,6 +1,6 @@
 'use strict';
 
-const COMPUTER_SIZE = 100;
+const COMPUTER_SIZE = 150;
 const COMPUTER_COUNT = 6;
 const BUG_COUNT = 6;
 const GAME_DURATION_SEC = 6;
@@ -31,6 +31,7 @@ let started = false;
 let score = 0;
 let timer = undefined;
 
+console.log(fieldRect);
 field.addEventListener('click', onFieldClick);
 
 playBtn.addEventListener('click', () => {
