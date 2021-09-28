@@ -175,4 +175,18 @@ button {
 .pop-up__hide {
   display: none;
 }
+
+.computer,
+.bug {
+  -webkit-transition: -webkit-transform 100ms ease-in;
+  transition: -webkit-transform 100ms ease-in;
+  transition: transform 100ms ease-in;
+  transition: transform 100ms ease-in, -webkit-transform 100ms ease-in;
+}
+
+.computer:hover,
+.bug:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
 /*# sourceMappingURL=style.css.map */

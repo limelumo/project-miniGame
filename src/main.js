@@ -59,7 +59,7 @@ function stopGame() {
   started = false;
   stopGameTimer();
   hideGameButton();
-  showPopUpWithText('Game Over🙄.. Repaly?');
+  showPopUpWithText('Repaly?');
   playSound(alertSound);
   stopSound(bgSound);
 }
@@ -74,7 +74,7 @@ function finishGame(win) {
   }
   stopGameTimer();
   stopSound(bgSound);
-  showPopUpWithText(win ? 'YOU WON🎊' : 'YOU LOST🎃');
+  showPopUpWithText(win ? 'Yay! You Won🎊' : 'You lost🙄..Replay?');
 }
 
 function showStopButton() {
