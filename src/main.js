@@ -1,9 +1,9 @@
 'use strict';
 
 const COMPUTER_SIZE = 150;
-const COMPUTER_COUNT = 6;
-const BUG_COUNT = 6;
-const GAME_DURATION_SEC = 6;
+let COMPUTER_COUNT = 6;
+let BUG_COUNT = 6;
+let GAME_DURATION_SEC = 4;
 
 const computers = document.querySelectorAll('.computer');
 const bugs = document.querySelectorAll('.bug');
@@ -12,6 +12,7 @@ const field = document.querySelector('.game__field');
 const fieldRect = field.getBoundingClientRect();
 const gameBtn = document.querySelector('.game__button');
 const gameTimer = document.querySelector('.game__timer');
+const gameLevel = document.querySelector('.game__level');
 const gameScore = document.querySelector('.game__score');
 
 const playBtn = document.querySelector('.game__playBtn');
@@ -19,6 +20,8 @@ const stopBtn = document.querySelector('.game__stopBtn');
 
 const popUp = document.querySelector('.pop-up');
 const popUpText = document.querySelector('.pop-up__message');
+const popUpNext = document.querySelector('.pop-up__next');
+const nextLevelBtn = document.querySelector('.pop-up__nextLevel');
 const popUpRefresh = document.querySelector('.pop-up__refresh');
 
 const bugSound = new Audio('./sound/bug_pull.mp3');
@@ -28,10 +31,10 @@ const bgSound = new Audio('./sound/bg.mp3');
 const winSound = new Audio('./sound/game_win.mp3');
 
 let started = false;
+let level = gameLevel.innerText;
 let score = 0;
 let timer = undefined;
 
-console.log(fieldRect);
 field.addEventListener('click', onFieldClick);
 
 playBtn.addEventListener('click', () => {
@@ -42,6 +45,18 @@ playBtn.addEventListener('click', () => {
 
 stopBtn.addEventListener('click', () => {
   stopGame();
+});
+
+nextLevelBtn.addEventListener('click', () => {
+  level++;
+  gameLevel.innerText = level;
+
+  COMPUTER_COUNT += GAME_DURATION_SEC;
+  BUG_COUNT += BUG_COUNT;
+  GAME_DURATION_SEC += GAME_DURATION_SEC;
+  startGame();
+  hidePopUp();
+  showStopButton();
 });
 
 popUpRefresh.addEventListener('click', () => {
@@ -60,6 +75,9 @@ function startGame() {
 }
 
 function stopGame() {
+  popUpNext.style.display = 'none';
+  popUpRefresh.style.display = 'block';
+
   started = false;
   stopGameTimer();
   hideGameButton();

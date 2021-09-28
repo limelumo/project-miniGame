@@ -16,9 +16,11 @@
     <section class="game__container">
       <header class="game__header">
         <div class="game__score"></div>
-        <div class="game__timer"></div>
+        <div class="game__levelAndTime">
+          <div>Level <span class="game__level">1</span></div>
+          <div class="game__timer"></div>
+        </div>
         <button class="game__button">
-          <!-- <span class="game__playBtn">Play!</span> -->
           <span class="game__stopBtn">Stop</span>
         </button>
       </header>
@@ -26,13 +28,13 @@
       <section class="game__pop-up">
         <div class="game__pop-up-text">
           모두가 퇴근한 사무실... <br />
-          개발자들이 땀과 눈물로 완성한 코드를<br />
-          벌레(bug)들이 노리고 있습니다!<br />
+          개발자들이 땀과 눈물로 완성한 코드를 벌레(bug)들이 노리고 있습니다!
+          <br />
           벌레로부터 코드를 지켜주세요! <br /><br />
 
           - How to Play - <br />
-          시간 내에 벌레를 클릭 해 없애주세요! <br />단, 소중한 코드가 담긴
-          컴퓨터는 <br />건드리지 않도록 주의하세요😫
+          시간 내에 벌레를 클릭 해 없애주세요! <br />
+          단, 소중한 코드가 담긴 컴퓨터는 건드리지 않도록 주의하세요😫
         </div>
 
         <button class="game__playBtn">Start</button>
@@ -42,10 +44,16 @@
     </section>
 
     <section class="pop-up pop-up__hide">
-      <button class="pop-up__refresh">
-        <i class="fas fa-redo"></i>
-      </button>
-      <span class="pop-up__message"></span>
+      <div class="pop-up__re">
+        <button class="pop-up__refresh">
+          <i class="fas fa-redo"></i>
+        </button>
+        <span class="pop-up__message"></span>
+      </div>
+
+      <div class="pop-up__next">
+        <button class="pop-up__nextLevel">Next Level</button>
+      </div>
     </section>
   </body>
 </html>

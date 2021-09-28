@@ -68,8 +68,15 @@ $point_c: darksalmon;
   }
 }
 
+.game__levelAndTime {
+  @include font(2em, bold, white);
+  display: block;
+  text-align: center;
+}
+
 .game__timer {
-  @include font(4em, bold, white);
+  @include font(2em, bold, white);
+  display: block;
   text-align: center;
   visibility: hidden;
 }
@@ -94,8 +101,37 @@ $point_c: darksalmon;
   margin-top: 16em;
 }
 
-.game__hide {
-  visibility: hidden;
+/** Game Start Pop-up part setting **/
+.game__pop-up {
+  @include flex(center, center, column);
+  @include object(50%, auto, #00000095);
+  position: absolute;
+  padding: 1.5em;
+  border-radius: 10px;
+  z-index: 1;
+  cursor: default;
+}
+
+.game__pop-up-text {
+  @include font(1.2em, '', white);
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.game__playBtn {
+  @include object(35%, auto, white);
+  @include font(1.5em, 700, black);
+  font-family: 'Gemunu Libre', sans-serif;
+  margin-top: 1.5em;
+  padding: 0.3em;
+  border-radius: 4px;
+  text-align: center;
+  transition: all 100ms ease-in;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 /** Pop-up part setting **/
@@ -111,6 +147,10 @@ $point_c: darksalmon;
   transform: translateY(-150%);
 }
 
+.pop-up__re {
+  @include flex(center, center, column);
+}
+
 .pop-up__refresh {
   @include object(2em, 2em, $point_c);
   @include flex(center, center, '');
@@ -118,6 +158,16 @@ $point_c: darksalmon;
   border-radius: 50%;
   border: 3px solid white;
   margin-bottom: 0.5em;
+  display: none;
+}
+
+.pop-up__nextLevel {
+  @include font(0.5em, 600, white);
+  background-color: $point_c;
+  padding: 0.35em 0.65em;
+  border: 3px solid white;
+  border-radius: 8px;
+  margin-top: 16px;
 }
 
 .pop-up__hide {
@@ -127,37 +177,6 @@ $point_c: darksalmon;
 .computer,
 .bug {
   transition: transform 100ms ease-in;
-  &:hover {
-    transform: scale(1.05);
-  }
-}
-
-.game__pop-up {
-  @include flex(center, center, column);
-  @include object(50%, auto, #00000095);
-  position: absolute;
-  padding: 1.5em;
-  border-radius: 10px;
-  z-index: 1;
-  cursor: default;
-}
-
-.game__pop-up-text {
-  @include font(1.2em, '', white);
-  font-family: 'Noto Sans KR', sans-serif;
-  text-align: center;
-}
-
-.game__playBtn {
-  @include object(35%, auto, white);
-  @include font(1.5em, 700, black);
-  font-family: 'Gemunu Libre', sans-serif;
-  margin-top: 1.5em;
-  padding: 0.3em;
-  border-radius: 4px;
-  text-align: center;
-  transition: all 100ms ease-in;
-
   &:hover {
     transform: scale(1.05);
   }
