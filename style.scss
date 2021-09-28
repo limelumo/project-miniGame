@@ -92,7 +92,6 @@ $point_c: darksalmon;
   @include object(100%, 100%, '');
   position: relative;
   margin-top: 16em;
-  // transition: transform 150ms ease-in;
 }
 
 .game__hide {
@@ -136,10 +135,11 @@ $point_c: darksalmon;
 .game__pop-up {
   @include flex(center, center, column);
   @include object(50%, auto, #00000095);
+  position: absolute;
   padding: 1.5em;
   border-radius: 10px;
   z-index: 1;
-  cursor: pointer;
+  cursor: default;
 }
 
 .game__pop-up-text {
@@ -151,6 +151,7 @@ $point_c: darksalmon;
 .game__playBtn {
   @include object(35%, auto, white);
   @include font(1.5em, 700, black);
+  font-family: 'Gemunu Libre', sans-serif;
   margin-top: 1.5em;
   padding: 0.3em;
   border-radius: 4px;

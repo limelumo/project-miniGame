@@ -32,12 +32,15 @@ let score = 0;
 let timer = undefined;
 
 field.addEventListener('click', onFieldClick);
-gameBtn.addEventListener('click', () => {
-  if (started) {
-    stopGame();
-  } else {
-    startGame();
-  }
+
+playBtn.addEventListener('click', () => {
+  const startPopUp = document.querySelector('.game__pop-up');
+  startGame();
+  startPopUp.style.display = 'none';
+});
+
+stopBtn.addEventListener('click', () => {
+  stopGame();
 });
 
 popUpRefresh.addEventListener('click', () => {
@@ -79,7 +82,6 @@ function finishGame(win) {
 
 function showStopButton() {
   gameBtn.style.visibility = 'visible';
-  playBtn.style.display = 'none';
   stopBtn.style.display = 'block';
 }
 
@@ -99,7 +101,6 @@ function startGameTimer() {
   timer = setInterval(() => {
     if (remainingTimeSec <= 0) {
       clearInterval(timer);
-      // showPopUpWithText('GAME OVER🙄');
       finishGame(BUG_COUNT === score);
       return;
     }
