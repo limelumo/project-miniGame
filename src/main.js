@@ -2,8 +2,6 @@
 
 import popUp from './popup.js';
 
-const COMPUTER_SIZE = 150;
-
 let GAME_DURATION_SEC = 3;
 
 const computers = document.querySelectorAll('.computer');
@@ -21,7 +19,6 @@ const startPopUp = document.querySelector('.game__pop-up');
 const popUpNext = document.querySelector('.pop-up__next');
 const nextLevelBtn = document.querySelector('.pop-up__nextLevel');
 
-const bugSound = new Audio('./sound/bug_pull.mp3');
 const computerSound = new Audio('./sound/computer_pull.mp3');
 const alertSound = new Audio('./sound/alert.wav');
 const bgSound = new Audio('./sound/bg.mp3');
@@ -151,26 +148,26 @@ function updateTimerText(time) {
 //   addItem('bug', BUG_COUNT, 'img/bug.png');
 // }
 
-function onFieldClick(e) {
-  if (!started) {
-    return;
-  }
+// function onFieldClick(e) {
+//   if (!started) {
+//     return;
+//   }
 
-  const target = e.target;
-  if (target.matches('.bug')) {
-    target.remove();
-    score++;
-    playSound(bugSound);
-    updateScoreBoard();
+//   const target = e.target;
+//   if (target.matches('.bug')) {
+//     target.remove();
+//     score++;
+//     playSound(bugSound);
+//     updateScoreBoard();
 
-    if (score === BUG_COUNT) {
-      finishGame(true);
-    }
-  } else if (target.matches('.computer')) {
-    stopGameTimer();
-    finishGame(false);
-  }
-}
+//     if (score === BUG_COUNT) {
+//       finishGame(true);
+//     }
+//   } else if (target.matches('.computer')) {
+//     stopGameTimer();
+//     finishGame(false);
+//   }
+// }
 
 function playSound(sound) {
   sound.currentTime = 0;
@@ -206,6 +203,6 @@ function updateScoreBoard() {
 //   }
 // }
 
-function randomNum(min, max) {
-  return Math.random() * (max - min) + min;
-}
+// function randomNum(min, max) {
+//   return Math.random() * (max - min) + min;
+// }

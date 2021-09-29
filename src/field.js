@@ -1,7 +1,6 @@
 'use strict';
 
 import * as sound from './sound.js';
-const bugSound = new Audio('./sound/bug_pull.mp3');
 const COMPUTER_SIZE = 150;
 
 export default class Field {
