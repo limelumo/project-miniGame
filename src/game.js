@@ -1,6 +1,7 @@
 'use strict';
 
 import * as sound from './sound.js';
+import PopUp from './popup.js';
 import { Field, ItemType } from './field.js';
 
 export const Reason = Object.freeze({
@@ -40,13 +41,19 @@ class Game {
     this.bugCount = bugCount;
     this.computerCount = computerCount;
 
+    this.gameLevel = document.querySelector('.game__level');
+    this.nextLevelBtn = document.querySelector('.pop-up__nextLevel');
+
     this.started = false;
     this.score = 0;
     this.timer = undefined;
+    this.level = this.gameLevel.innerText;
 
+    this.popUp = new PopUp();
     this.gameField = new Field(bugCount, computerCount);
     this.gameField.setClickListener(this.onItemClick);
 
+    this.startPopUp = document.querySelector('.game__pop-up');
     this.gameTimer = document.querySelector('.game__timer');
     this.gameScore = document.querySelector('.game__score');
     this.gameBtn = document.querySelector('.game__button');
@@ -54,10 +61,16 @@ class Game {
     this.stopBtn = document.querySelector('.game__stopBtn');
 
     this.playBtn.addEventListener('click', () => {
-      start();
-      // startPopUp.style.display = 'none';
+      this.start();
+      this.startPopUp.style.display = 'none';
     });
-    this.stopBtn.addEventListener('click', stop());
+    this.stopBtn.addEventListener('click', () => {
+      this.stop(Reason.cancel);
+    });
+
+    this.nextLevelBtn.addEventListener('click', () => {
+      this.nextLevel();
+    });
   }
 
   setGameStopListener(onGameStop) {
@@ -73,32 +86,26 @@ class Game {
     sound.playBackground();
   }
 
-  stop() {
-    // popUpNext.style.display = 'none';
-    // popUpRefresh.style.display = 'block';
+  nextLevel() {
+    this.level++;
+    this.gameLevel.innerText = this.level;
+    this.popUp.hide();
 
-    this.started = false;
-    this.stopGameTimer();
-    this.hideGameButton();
-    sound.playAlert();
-    sound.stopBackground();
-    this.onGameStop && this.onGameStop(Reason.cancel);
+    this.computerCount += 5;
+    this.bugCount += 3;
+    this.gameDuration += 3;
+
+    this.gameField = new Field(this.computerCount, this.bugCount);
+    this.start();
   }
 
   stop(reason) {
+    this.popUp.popUpNext.style.display = 'none';
+    this.popUp.popUpRefresh.style.display = 'block';
+
     this.started = false;
     this.stopGameTimer();
     this.hideGameButton();
-
-    // if (win) {
-    //   sound.playWin();
-    //   //   popUpNext.style.display = 'block';
-    //   // popUpRefresh.style.display = 'none';
-    // } else {
-    //   sound.playComputer();
-    //   //   popUpNext.style.display = 'none';
-    //   // popUpRefresh.style.display = 'block';
-    // }
     sound.stopBackground();
     this.onGameStop && this.onGameStop(reason);
   }
@@ -120,17 +127,17 @@ class Game {
   };
 
   showStopButton() {
-    gameBtn.style.visibility = 'visible';
-    stopBtn.style.display = 'block';
+    this.gameBtn.style.visibility = 'visible';
+    this.stopBtn.style.display = 'block';
   }
 
   hideGameButton() {
-    gameBtn.style.visibility = 'hidden';
+    this.gameBtn.style.visibility = 'hidden';
   }
 
   showTimerAndScore() {
-    gameTimer.style.visibility = 'visible';
-    gameScore.style.visibility = 'visible';
+    this.gameTimer.style.visibility = 'visible';
+    this.gameScore.style.visibility = 'visible';
   }
 
   startGameTimer() {
@@ -159,7 +166,7 @@ class Game {
 
   initGame() {
     this.score = 0;
-    this.gameScore.innerText = this.bugCount;
+    this.gameScore.innerHTML = `<i class="fas fa-bug"></i>${this.bugCount}`;
     this.gameField.init();
   }
 

@@ -13,7 +13,7 @@ export class Field {
     this.computerCount = computerCount;
     this.bugCount = bugCount;
     this.field = document.querySelector('.game__field');
-    this.fieldRect = field.getBoundingClientRect();
+    this.fieldRect = this.field.getBoundingClientRect();
     this.field.addEventListener('click', this.onClick);
   }
 
