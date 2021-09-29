@@ -3,7 +3,12 @@
 import * as sound from './sound.js';
 const COMPUTER_SIZE = 150;
 
-export default class Field {
+export const ItemType = Object.freeze({
+  carrot: 'carrot',
+  bug: 'bug',
+});
+
+export class Field {
   constructor(computerCount, bugCount) {
     this.computerCount = computerCount;
     this.bugCount = bugCount;
@@ -48,9 +53,9 @@ export default class Field {
     if (target.matches('.bug')) {
       target.remove();
       sound.playBug();
-      this.onItemClick && this.onItemClick('bug');
+      this.onItemClick && this.onItemClick(ItemType.bug);
     } else if (target.matches('.computer')) {
-      this.onItemClick && this.onItemClick('computer');
+      this.onItemClick && this.onItemClick(ItemType.computer);
     }
   };
 }

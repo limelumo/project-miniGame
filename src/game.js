@@ -1,7 +1,7 @@
 'use strict';
 
 import * as sound from './sound.js';
-import Field from './field.js';
+import { Field, ItemType } from './field.js';
 
 export const Reason = Object.freeze({
   win: 'win',
@@ -85,37 +85,37 @@ class Game {
     this.onGameStop && this.onGameStop(Reason.cancel);
   }
 
-  finish(win) {
+  stop(reason) {
     this.started = false;
+    this.stopGameTimer();
     this.hideGameButton();
 
-    if (win) {
-      sound.playWin();
-      //   popUpNext.style.display = 'block';
-      // popUpRefresh.style.display = 'none';
-    } else {
-      sound.playComputer();
-      //   popUpNext.style.display = 'none';
-      // popUpRefresh.style.display = 'block';
-    }
-    this.stopGameTimer();
+    // if (win) {
+    //   sound.playWin();
+    //   //   popUpNext.style.display = 'block';
+    //   // popUpRefresh.style.display = 'none';
+    // } else {
+    //   sound.playComputer();
+    //   //   popUpNext.style.display = 'none';
+    //   // popUpRefresh.style.display = 'block';
+    // }
     sound.stopBackground();
-    this.onGameStop && this.onGameStop(win ? Reason.win : Reason.lose);
+    this.onGameStop && this.onGameStop(reason);
   }
 
   onItemClick = (item) => {
     if (!this.started) {
       return;
     }
-    if (item === 'bug') {
+    if (item === ItemType.bug) {
       this.score++;
       this.updateScoreBoard();
 
       if (this.score === this.bugCount) {
-        this.finish(true);
+        this.stop(Reason.win);
       }
-    } else if (item === 'computer') {
-      this.finish(false);
+    } else if (item === ItemType.computer) {
+      this.stop(Reason.lose);
     }
   };
 
