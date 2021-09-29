@@ -1,33 +1,20 @@
 'use strict';
 
-import popUp from './popup.js';
+import Game from './game.js';
+import PopUp from './popup.js';
 
 let GAME_DURATION_SEC = 3;
 
 const computers = document.querySelectorAll('.computer');
 const bugs = document.querySelectorAll('.bug');
 
-const gameBtn = document.querySelector('.game__button');
-const gameTimer = document.querySelector('.game__timer');
 const gameLevel = document.querySelector('.game__level');
-const gameScore = document.querySelector('.game__score');
-
-const playBtn = document.querySelector('.game__playBtn');
-const stopBtn = document.querySelector('.game__stopBtn');
 
 const startPopUp = document.querySelector('.game__pop-up');
 const popUpNext = document.querySelector('.pop-up__next');
 const nextLevelBtn = document.querySelector('.pop-up__nextLevel');
 
-const computerSound = new Audio('./sound/computer_pull.mp3');
-const alertSound = new Audio('./sound/alert.wav');
-const bgSound = new Audio('./sound/bg.mp3');
-const winSound = new Audio('./sound/game_win.mp3');
-
-let started = false;
 let level = gameLevel.innerText;
-let score = 0;
-let timer = undefined;
 
 const gameFinishBanner = new popUp();
 gameFinishBanner.setClickListener(() => {
@@ -35,14 +22,14 @@ gameFinishBanner.setClickListener(() => {
 });
 
 field.addEventListener('click', onFieldClick);
-playBtn.addEventListener('click', () => {
-  startGame();
-  startPopUp.style.display = 'none';
-});
+// playBtn.addEventListener('click', () => {
+//   startGame();
+//   startPopUp.style.display = 'none';
+// });
 
-stopBtn.addEventListener('click', () => {
-  stopGame();
-});
+// stopBtn.addEventListener('click', () => {
+//   stopGame();
+// });
 
 nextLevelBtn.addEventListener('click', () => {
   level++;
@@ -62,82 +49,82 @@ nextLevelBtn.addEventListener('click', () => {
 //   showStopButton();
 // });
 
-function startGame() {
-  started = true;
-  initGame();
-  showStopButton();
-  showTimerAndScore();
-  startGameTimer();
-  playSound(bgSound);
-}
+// function startGame() {
+//   started = true;
+//   initGame();
+//   showStopButton();
+//   showTimerAndScore();
+//   startGameTimer();
+//   playSound(bgSound);
+// }
 
-function stopGame() {
-  popUpNext.style.display = 'none';
-  popUpRefresh.style.display = 'block';
+// function stopGame() {
+//   popUpNext.style.display = 'none';
+//   popUpRefresh.style.display = 'block';
 
-  started = false;
-  stopGameTimer();
-  hideGameButton();
-  gameFinishBanner.showWithText('Repaly?');
-  playSound(alertSound);
-  stopSound(bgSound);
-}
+//   started = false;
+//   stopGameTimer();
+//   hideGameButton();
+//   gameFinishBanner.showWithText('Repaly?');
+//   playSound(alertSound);
+//   stopSound(bgSound);
+// }
 
-function finishGame(win) {
-  started = false;
-  hideGameButton();
+// function finishGame(win) {
+//   started = false;
+//   hideGameButton();
 
-  if (win) {
-    playSound(winSound);
-    popUpNext.style.display = 'block';
-    popUpRefresh.style.display = 'none';
-  } else {
-    playSound(computerSound);
-    popUpNext.style.display = 'none';
-    popUpRefresh.style.display = 'block';
-  }
-  stopGameTimer();
-  stopSound(bgSound);
-  gameFinishBanner.showWithText(win ? 'Yay! You Won🎊' : 'You lost🙄..Replay?');
-}
+//   if (win) {
+//     playSound(winSound);
+//     popUpNext.style.display = 'block';
+//     popUpRefresh.style.display = 'none';
+//   } else {
+//     playSound(computerSound);
+//     popUpNext.style.display = 'none';
+//     popUpRefresh.style.display = 'block';
+//   }
+//   stopGameTimer();
+//   stopSound(bgSound);
+//   gameFinishBanner.showWithText(win ? 'Yay! You Won🎊' : 'You lost🙄..Replay?');
+// }
 
-function showStopButton() {
-  gameBtn.style.visibility = 'visible';
-  stopBtn.style.display = 'block';
-}
+// function showStopButton() {
+//   gameBtn.style.visibility = 'visible';
+//   stopBtn.style.display = 'block';
+// }
 
-function hideGameButton() {
-  gameBtn.style.visibility = 'hidden';
-}
+// function hideGameButton() {
+//   gameBtn.style.visibility = 'hidden';
+// }
 
-function showTimerAndScore() {
-  gameTimer.style.visibility = 'visible';
-  gameScore.style.visibility = 'visible';
-}
+// function showTimerAndScore() {
+//   gameTimer.style.visibility = 'visible';
+//   gameScore.style.visibility = 'visible';
+// }
 
-function startGameTimer() {
-  let remainingTimeSec = GAME_DURATION_SEC;
-  updateTimerText(remainingTimeSec);
+// function startGameTimer() {
+//   let remainingTimeSec = GAME_DURATION_SEC;
+//   updateTimerText(remainingTimeSec);
 
-  timer = setInterval(() => {
-    if (remainingTimeSec <= 0) {
-      clearInterval(timer);
-      finishGame(BUG_COUNT === score);
-      return;
-    }
-    updateTimerText(--remainingTimeSec);
-  }, 1000);
-}
+//   timer = setInterval(() => {
+//     if (remainingTimeSec <= 0) {
+//       clearInterval(timer);
+//       finishGame(BUG_COUNT === score);
+//       return;
+//     }
+//     updateTimerText(--remainingTimeSec);
+//   }, 1000);
+// }
 
-function stopGameTimer() {
-  clearInterval(timer);
-}
+// function stopGameTimer() {
+//   clearInterval(timer);
+// }
 
-function updateTimerText(time) {
-  const minutes = Math.floor(time / 60);
-  const seconds = time % 60;
-  gameTimer.innerText = `${minutes}:${seconds}`;
-}
+// function updateTimerText(time) {
+//   const minutes = Math.floor(time / 60);
+//   const seconds = time % 60;
+//   gameTimer.innerText = `${minutes}:${seconds}`;
+// }
 
 // function initGame() {
 //   score = 0;
@@ -169,18 +156,9 @@ function updateTimerText(time) {
 //   }
 // }
 
-function playSound(sound) {
-  sound.currentTime = 0;
-  sound.play();
-}
-
-function stopSound(sound) {
-  sound.pause();
-}
-
-function updateScoreBoard() {
-  gameScore.innerHTML = `<i class="fas fa-bug"></i>${BUG_COUNT - score}`;
-}
+// function updateScoreBoard() {
+//   gameScore.innerHTML = `<i class="fas fa-bug"></i>${BUG_COUNT - score}`;
+// }
 
 // function addItem(className, count, imgPath) {
 //   const x1 = 0;

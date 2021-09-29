@@ -5,8 +5,8 @@ const COMPUTER_SIZE = 150;
 
 export default class Field {
   constructor(computerCount, bugCount) {
-    this.COMPUTER_COUNT = COMPUTER_COUNT;
-    this.BUG_COUNT = BUG_COUNT;
+    this.computerCount = computerCount;
+    this.bugCount = bugCount;
     this.field = document.querySelector('.game__field');
     this.fieldRect = field.getBoundingClientRect();
     this.field.addEventListener('click', this.onClick);
@@ -14,8 +14,8 @@ export default class Field {
 
   init() {
     this.field.innerHTML = '';
-    this._addItem('computer', COMPUTER_COUNT, 'img/computer.png');
-    this._addItem('bug', BUG_COUNT, 'img/bug.png');
+    this._addItem('computer', this.computerCount, 'img/computer.png');
+    this._addItem('bug', this.bugCount, 'img/bug.png');
   }
 
   setClickListener(onItemClick) {
@@ -43,7 +43,7 @@ export default class Field {
     }
   }
 
-  onClick(e) {
+  onClick = (e) => {
     const target = e.target;
     if (target.matches('.bug')) {
       target.remove();
@@ -52,7 +52,7 @@ export default class Field {
     } else if (target.matches('.computer')) {
       this.onItemClick && this.onItemClick('computer');
     }
-  }
+  };
 }
 
 function randomNum(min, max) {
