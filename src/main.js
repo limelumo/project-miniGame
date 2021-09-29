@@ -1,5 +1,7 @@
 'use strict';
 
+import popUp from './popup.js';
+
 const COMPUTER_SIZE = 150;
 let COMPUTER_COUNT = 6;
 let BUG_COUNT = 3;
@@ -18,11 +20,9 @@ const gameScore = document.querySelector('.game__score');
 const playBtn = document.querySelector('.game__playBtn');
 const stopBtn = document.querySelector('.game__stopBtn');
 
-const popUp = document.querySelector('.pop-up');
-const popUpText = document.querySelector('.pop-up__message');
+const startPopUp = document.querySelector('.game__pop-up');
 const popUpNext = document.querySelector('.pop-up__next');
 const nextLevelBtn = document.querySelector('.pop-up__nextLevel');
-const popUpRefresh = document.querySelector('.pop-up__refresh');
 
 const bugSound = new Audio('./sound/bug_pull.mp3');
 const computerSound = new Audio('./sound/computer_pull.mp3');
@@ -35,10 +35,13 @@ let level = gameLevel.innerText;
 let score = 0;
 let timer = undefined;
 
-field.addEventListener('click', onFieldClick);
+const gameFinishBanner = new popUp();
+gameFinishBanner.setClickListener(() => {
+  startGame();
+});
 
+field.addEventListener('click', onFieldClick);
 playBtn.addEventListener('click', () => {
-  const startPopUp = document.querySelector('.game__pop-up');
   startGame();
   startPopUp.style.display = 'none';
 });
@@ -59,11 +62,11 @@ nextLevelBtn.addEventListener('click', () => {
   showStopButton();
 });
 
-popUpRefresh.addEventListener('click', () => {
-  startGame();
-  hidePopUp();
-  showStopButton();
-});
+// popUpRefresh.addEventListener('click', () => {
+//   startGame();
+//   hidePopUp();
+//   showStopButton();
+// });
 
 function startGame() {
   started = true;
@@ -81,7 +84,7 @@ function stopGame() {
   started = false;
   stopGameTimer();
   hideGameButton();
-  showPopUpWithText('Repaly?');
+  gameFinishBanner.showWithText('Repaly?');
   playSound(alertSound);
   stopSound(bgSound);
 }
@@ -101,7 +104,7 @@ function finishGame(win) {
   }
   stopGameTimer();
   stopSound(bgSound);
-  showPopUpWithText(win ? 'Yay! You Won🎊' : 'You lost🙄..Replay?');
+  gameFinishBanner.showWithText(win ? 'Yay! You Won🎊' : 'You lost🙄..Replay?');
 }
 
 function showStopButton() {
@@ -140,15 +143,6 @@ function updateTimerText(time) {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
   gameTimer.innerText = `${minutes}:${seconds}`;
-}
-
-function showPopUpWithText(text) {
-  popUpText.innerText = text;
-  popUp.classList.remove('pop-up__hide');
-}
-
-function hidePopUp() {
-  popUp.classList.add('pop-up__hide');
 }
 
 function initGame() {
