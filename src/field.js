@@ -1,7 +1,7 @@
 'use strict';
 
 import * as sound from './sound.js';
-const COMPUTER_SIZE = 150;
+const COMPUTER_SIZE = 100;
 
 export const ItemType = Object.freeze({
   carrot: 'carrot',

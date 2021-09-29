@@ -6,7 +6,7 @@ import * as sound from './sound.js';
 
 const gameFinishBanner = new PopUp();
 const game = new GameBuilder()
-  .gameDuration(5)
+  .gameDuration(2)
   .bugCount(3)
   .computerCount(3)
   .build();
@@ -15,7 +15,7 @@ game.setGameStopListener((reason) => {
   let message;
   switch (reason) {
     case Reason.cancel:
-      message = 'REPLAY🙄❓';
+      message = 'Replay?🙄';
       sound.playAlert();
       break;
     case Reason.win:

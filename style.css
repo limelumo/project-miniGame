@@ -6,6 +6,10 @@ body {
   background-color: black;
   font-family: 'Gemunu Libre', sans-serif;
   overflow-y: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 button {
@@ -54,10 +58,6 @@ button {
       -ms-flex-direction: "";
           flex-direction: "";
   margin: 2em 0;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
 }
 
 .game__score {
@@ -278,5 +278,59 @@ button {
 .bug:hover {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
+}
+
+/***** For below 768px screen width *****/
+@media screen and (max-width: 768px) {
+  .game__score {
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+  }
+  .game__score i {
+    width: 1.35em;
+    height: 1.35em;
+    background-color: darksalmon;
+    line-height: 1.35em;
+    margin-right: 8px;
+  }
+  .game__button {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: white;
+  }
+  .game__field {
+    margin-top: 0;
+  }
+  .pop-up {
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+  }
+  .pop-up__refresh {
+    font-size: 1em;
+    font-weight: "";
+    color: white;
+  }
+  .game__pop-up-text {
+    font-size: 1em;
+    font-weight: "";
+    color: white;
+  }
+  .pop-up__nextLevel {
+    font-size: 0.8em;
+    font-weight: 600;
+    color: white;
+  }
+  .computer {
+    width: 60px;
+    height: auto;
+    background-color: "";
+  }
+  .bug {
+    width: 80px;
+    height: auto;
+    background-color: "";
+  }
 }
 /*# sourceMappingURL=style.css.map */

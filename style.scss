@@ -10,6 +10,7 @@ body {
   background-color: black;
   font-family: 'Gemunu Libre', sans-serif;
   overflow-y: hidden;
+  user-select: none;
 }
 
 button {
@@ -51,7 +52,6 @@ $point_c: darksalmon;
   @include object(90%, auto, '');
   @include flex(center, space-between, '');
   margin: 2em 0;
-  user-select: none;
 }
 
 .game__score {
@@ -180,5 +180,49 @@ $point_c: darksalmon;
   transition: transform 100ms ease-in;
   &:hover {
     transform: scale(1.05);
+  }
+}
+
+/***** For below 768px screen width *****/
+@media screen and (max-width: 768px) {
+  .game__score {
+    @include font(2em, bold, white);
+    i {
+      @include object(1.35em, 1.35em, $point_c);
+      line-height: 1.35em;
+      margin-right: 8px;
+    }
+  }
+
+  .game__button {
+    @include font(1.5em, 700, white);
+  }
+
+  .game__field {
+    margin-top: 0;
+  }
+
+  .pop-up {
+    @include font(2em, bold, white);
+  }
+
+  .pop-up__refresh {
+    @include font(1em, '', white);
+  }
+
+  .game__pop-up-text {
+    @include font(1em, '', white);
+  }
+
+  .pop-up__nextLevel {
+    @include font(0.8em, 600, white);
+  }
+
+  .computer {
+    @include object(60px, auto, '');
+  }
+
+  .bug {
+    @include object(80px, auto, '');
   }
 }

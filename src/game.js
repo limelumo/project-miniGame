@@ -93,7 +93,7 @@ class Game {
 
     this.computerCount += 5;
     this.bugCount += 3;
-    this.gameDuration += 3;
+    this.gameDuration += 2;
 
     this.gameField = new Field(this.computerCount, this.bugCount);
     this.start();
