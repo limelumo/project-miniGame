@@ -3,7 +3,32 @@
 import * as sound from './sound.js';
 import Field from './field.js';
 
-export default class Game {
+export default class GameBuilder {
+  gameDuration(duration) {
+    this.gameDuration = duration;
+    return this;
+  }
+
+  bugCount(num) {
+    this.bugCount = num;
+    return this;
+  }
+
+  computerCount(num) {
+    this.computerCount = num;
+    return this;
+  }
+
+  build() {
+    return new Game(
+      this.gameDuration, //
+      this.bugCount,
+      this.computerCount
+    );
+  }
+}
+
+class Game {
   constructor(gameDuration, bugCount, computerCount) {
     this.gameDuration = gameDuration;
     this.bugCount = bugCount;

@@ -1,6 +1,7 @@
 'use strict';
 
 import Game from './game.js';
+import GameBuilder from './game.js';
 import PopUp from './popup.js';
 
 const gameLevel = document.querySelector('.game__level');
@@ -14,7 +15,12 @@ gameFinishBanner.setClickListener(() => {
   game.start();
 });
 
-const game = new Game(3, 3, 3);
+const game = new GameBuilder()
+  .gameDuration(5)
+  .bugCount(3)
+  .computerCount(3)
+  .build(5);
+
 game.setGameStopListener((reason) => {
   let message;
 
