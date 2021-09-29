@@ -7,7 +7,7 @@ export default class popUp {
     this.popUpRefresh = document.querySelector('.pop-up__refresh');
     this.popUpRefresh.addEventListener('click', () => {
       this.onClick && this.onClick();
-      hidePopUp();
+      this.hide();
       showStopButton();
     });
   }
@@ -21,7 +21,7 @@ export default class popUp {
     this.popUp.classList.remove('pop-up__hide');
   }
 
-  hidePopUp() {
+  hide() {
     this.popUp.classList.add('pop-up__hide');
   }
 }

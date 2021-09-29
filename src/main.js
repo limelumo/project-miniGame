@@ -3,15 +3,12 @@
 import popUp from './popup.js';
 
 const COMPUTER_SIZE = 150;
-let COMPUTER_COUNT = 6;
-let BUG_COUNT = 3;
+
 let GAME_DURATION_SEC = 3;
 
 const computers = document.querySelectorAll('.computer');
 const bugs = document.querySelectorAll('.bug');
 
-const field = document.querySelector('.game__field');
-const fieldRect = field.getBoundingClientRect();
 const gameBtn = document.querySelector('.game__button');
 const gameTimer = document.querySelector('.game__timer');
 const gameLevel = document.querySelector('.game__level');
@@ -145,14 +142,14 @@ function updateTimerText(time) {
   gameTimer.innerText = `${minutes}:${seconds}`;
 }
 
-function initGame() {
-  score = 0;
-  field.innerHTML = '';
-  gameScore.innerHTML = `<i class="fas fa-bug"></i>${BUG_COUNT}`;
+// function initGame() {
+//   score = 0;
+//   field.innerHTML = '';
+//   gameScore.innerHTML = `<i class="fas fa-bug"></i>${BUG_COUNT}`;
 
-  addItem('computer', COMPUTER_COUNT, 'img/computer.png');
-  addItem('bug', BUG_COUNT, 'img/bug.png');
-}
+//   addItem('computer', COMPUTER_COUNT, 'img/computer.png');
+//   addItem('bug', BUG_COUNT, 'img/bug.png');
+// }
 
 function onFieldClick(e) {
   if (!started) {
@@ -188,26 +185,26 @@ function updateScoreBoard() {
   gameScore.innerHTML = `<i class="fas fa-bug"></i>${BUG_COUNT - score}`;
 }
 
-function addItem(className, count, imgPath) {
-  const x1 = 0;
-  const y1 = 0;
-  const x2 = fieldRect.width - COMPUTER_SIZE;
-  const y2 = fieldRect.height - COMPUTER_SIZE;
+// function addItem(className, count, imgPath) {
+//   const x1 = 0;
+//   const y1 = 0;
+//   const x2 = fieldRect.width - COMPUTER_SIZE;
+//   const y2 = fieldRect.height - COMPUTER_SIZE;
 
-  for (let i = 0; i < count; i++) {
-    const item = document.createElement('img');
-    const x = randomNum(x1, x2);
-    const y = randomNum(y1, y2);
+//   for (let i = 0; i < count; i++) {
+//     const item = document.createElement('img');
+//     const x = randomNum(x1, x2);
+//     const y = randomNum(y1, y2);
 
-    item.setAttribute('class', className);
-    item.setAttribute('src', imgPath);
+//     item.setAttribute('class', className);
+//     item.setAttribute('src', imgPath);
 
-    item.style.position = 'absolute';
-    item.style.left = `${x}px`;
-    item.style.top = `${y}px`;
-    field.appendChild(item);
-  }
-}
+//     item.style.position = 'absolute';
+//     item.style.left = `${x}px`;
+//     item.style.top = `${y}px`;
+//     field.appendChild(item);
+//   }
+// }
 
 function randomNum(min, max) {
   return Math.random() * (max - min) + min;
