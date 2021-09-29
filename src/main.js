@@ -2,6 +2,7 @@
 
 import { GameBuilder, Reason } from './game.js';
 import PopUp from './popup.js';
+import * as sound from './sound.js';
 
 const gameLevel = document.querySelector('.game__level');
 const startPopUp = document.querySelector('.game__pop-up');
@@ -22,12 +23,15 @@ game.setGameStopListener((reason) => {
   switch (reason) {
     case Reason.cancel:
       message = 'REPLAY🙄❓';
+      sound.playAlert();
       break;
     case Reason.win:
       message = 'Yay! You won🎉';
+      sound.playWin();
       break;
     case Reason.lose:
       message = 'You lost🙄..Replay?';
+      sound.playBug();
       break;
     default:
       throw new Error('not valid reason');
